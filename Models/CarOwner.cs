@@ -14,7 +14,6 @@ namespace taxi_app_api.Models
         public bool IsActive { get; set; }
         public string LicenseId { get; set; } = string.Empty;
 
-        [ForeignKey("Car")]
         public Car? Car { get; set; }
         public int CarId { get; set; }
     }
