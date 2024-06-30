@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using taxi_app_api.DatabaseContext;
 using taxi_app_api.Dtos;
+using taxi_app_api.Exceptions;
 using taxi_app_api.Models;
 using taxi_app_api.Services.Contracts;
 
@@ -32,7 +34,15 @@ namespace taxi_app_api.Services
 
         public CarOwner GetSingleCarOwnerAsync(int id)
         {
-            return this._dbContext.CarOwners.FirstOrDefault(x => x.Id == id);
+
+            var carOwner = this._dbContext.CarOwners.FirstOrDefault(x => x.Id == id);   
+
+            if(carOwner == null)
+            {
+                throw new NotFoundException(nameof(CarOwner), id); 
+            }
+
+            return carOwner; 
         }
 
         public Task<CarOwner> UpdateCarOwnerAsync(CarOwnerDto carOwnerDto)
