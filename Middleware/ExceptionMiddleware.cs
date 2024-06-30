@@ -38,8 +38,6 @@ namespace taxi_app_api.Middleware
                     Message = ex.Message
                 }; 
             }
-            httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-
             await httpContext.Response.WriteAsJsonAsync(errorDetails);
         }
     }
