@@ -7,7 +7,7 @@ namespace taxi_app_api.Services.Contracts
     {
         Task<List<CarOwner>> GetCarOwnersAsync();
 
-        Task<CarOwner> GetSingleCarOwnerAsync(int id);
+        CarOwner GetSingleCarOwnerAsync(int id);
 
         Task CreateCarOwnerAsync(CarOwnerDto carOwnerDto);
 

@@ -9,17 +9,23 @@ namespace taxi_app_api.Controllers
     [ApiController]
     public class CarOwnerController : ControllerBase
     {
-        private ICarService CarService { get; set; } 
+        private ICarOwner _carOwnerService { get; set; } 
 
-        public CarOwnerController(ICarService carService)
+        public CarOwnerController(ICarOwner carOwner)
         {
-            CarService = carService;
+            _carOwnerService = carOwner;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<CarOwner>>> Get()
+        public async Task<ActionResult<List<CarOwner>>> GetAll()
         {
-            return Ok();
+            return Ok( await _carOwnerService.GetCarOwnersAsync());
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<CarOwner> GetById(int id)
+        {
+            return Ok(_carOwnerService.GetSingleCarOwnerAsync(id));
         }
     }
 }
